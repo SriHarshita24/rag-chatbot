@@ -1,0 +1,207 @@
+PS C:\Users\Sri Harshita\OneDrive\Desktop\chat> python project.py
+
+ EXOPLANET DATASET OVERVIEW
+--------------------------------------------------
+Total planets: 7297
+Year range: 1992.0 - 2026.0
+Average mass: 2.32 Jupiter masses
+Main discovery methods: {'Transit': 3497, 'Radial Velocity': 2804, 'Microlensing': 754}
+--------------------------------------------------
+
+Ask questions like:
+- largest planets
+- planets after 2015
+- largest planets after 2015 using transit
+
+
+Question: largest planets
+
+ Llama3 Query:
+ Here is the one-line Pandas query:
+```
+df.query('pl_bmassj == pl_bmassj.max()')
+```
+
+ DeepSeek Query:
+ 
+ Using smart query
+
+ Too many results. Showing top 10. Consider refining your query.
+
+
+ Data:
+
++-------+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+|       | pl_name                   | hostname                |   pl_bmassj |   pl_radj | discoverymethod   |   disc_year |
++=======+===========================+=========================+=============+===========+===================+=============+
+| 35965 | PH2 b                     | PH2                     |       80    |       0.9 | Transit           |        2013 |
++-------+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+|  3807 | HD 72659 c                | HD 72659                |       78    |     nan   | Radial Velocity   |        2022 |
++-------+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 35636 | OGLE-2014-BLG-0221L b     | OGLE-2014-BLG-0221L     |       72.16 |     nan   | Microlensing      |        2024 |
++-------+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 35722 | OGLE-2016-BLG-1266L b     | OGLE-2016-BLG-1266L     |       68    |     nan   | Microlensing      |        2018 |
++-------+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 35723 | OGLE-2016-BLG-1266L b     | OGLE-2016-BLG-1266L     |       68    |     nan   | Microlensing      |        2018 |
++-------+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+|   218 | BD+20 2457 b              | BD+20 2457              |       55.59 |     nan   | Radial Velocity   |        2009 |
++-------+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 35638 | OGLE-2014-BLG-0221L b     | OGLE-2014-BLG-0221L     |       48.62 |     nan   | Microlensing      |        2024 |
++-------+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+|  2993 | HD 206893 b               | HD 206893               |       48    |     nan   | Imaging           |        2021 |
++-------+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 37896 | VHS J125601.92-125723.9 b | VHS J125601.92-125723.9 |       43.3  |     nan   | Imaging           |        2015 |
++-------+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+|  6605 | KMT-2022-BLG-2286L b      | KMT-2022-BLG-2286L      |       43    |     nan   | Microlensing      |        2024 |
++-------+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+
+ Llama3:
+ These planets have an average mass of 60.47 Jupiter masses, with the largest reaching 80.0. Most were discovered using Microlensing.
+
+ DeepSeek:
+ The results show planets discovered mainly around 2024, with dominant methods like Microlensing and varying masses.
+
+ Comparison
+Query diff detected
+Summary diff detected
+
+ Final:
+ Final Summary:
+These planets have an average mass of 60.47 Jupiter masses, with the largest reaching 80.0. Most were discovered using Microlensing.
+
+Additional Insight:
+The results show planets discovered mainly around 2024, with dominant methods like Microlensing and varying masses.
+
+Question: planets after 2015
+
+ Llama3 Query:
+ Here is the one-line Pandas query:
+```
+df.query('disc_year > 2015')
+```
+
+ DeepSeek Query:
+
+ Using smart query
+
+ Too many results. Showing top 10. Consider refining your query.
+
+
+ Data:
+
++----+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+|    | pl_name                   | hostname                |   pl_bmassj |   pl_radj | discoverymethod   |   disc_year |
++====+===========================+=========================+=============+===========+===================+=============+
+| 23 | 17 Sco b                  | 17 Sco                  |       4.32  |       nan | Radial Velocity   |        2020 |
++----+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 31 | 24 Boo b                  | 24 Boo                  |       0.91  |       nan | Radial Velocity   |        2018 |
++----+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 32 | 24 Boo b                  | 24 Boo                  |       0.883 |       nan | Radial Velocity   |        2018 |
++----+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 35 | 2M0437 b                  | 2MASS J04372171+2651014 |       4     |       nan | Imaging           |        2021 |
++----+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 40 | 2MASS J0249-0557 c        | 2MASS J0249-0557 A      |      11.6   |       nan | Imaging           |        2018 |
++----+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 41 | 2MASS J03590986+2009361 b | 2MASS J03590986+2009361 |      18     |       nan | Imaging           |        2024 |
++----+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 43 | 2MASS J11011926-7732383 b | 2MASS J11011926-7732383 |      28     |       nan | Imaging           |        2024 |
++----+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 44 | 2MASS J11550485-7919108 b | 2MASS J11550485-7919108 |      20     |       nan | Imaging           |        2024 |
++----+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 49 | 2MASS J21252752-8138278 b | 2MASS J21252752-8138278 |      12     |       nan | Imaging           |        2024 |
++----+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+| 50 | 2MASS J22362452+4751425 b | 2MASS J22362452+4751425 |      12.5   |       nan | Imaging           |        2016 |
++----+---------------------------+-------------------------+-------------+-----------+-------------------+-------------+
+
+ Llama3:
+ These planets have an average mass of 11.22 Jupiter masses, with the largest reaching 28.0. Most were discovered using Imaging.
+
+ DeepSeek:
+ The results show planets discovered mainly around 2024, with dominant methods like Imaging and varying masses.   
+
+ Comparison
+Query diff detected
+Summary diff detected
+
+ Final:
+ Final Summary:
+These planets have an average mass of 11.22 Jupiter masses, with the largest reaching 28.0. Most were discovered using Imaging.
+
+Additional Insight:
+The results show planets discovered mainly around 2024, with dominant methods like Imaging and varying masses.    
+
+Question: planets after 2015 using transit
+
+ Llama3 Query:
+ Here is the Pandas query:
+```
+df.query("disc_year > 2015 and discoverymethod == 'transit'")
+```
+
+ DeepSeek Query:
+
+ Using smart query
+
+ Too many results. Showing top 10. Consider refining your query.
+
+
+ Data:
+
++-----+-----------+------------+-------------+------------+-------------------+-------------+
+|     | pl_name   | hostname   |   pl_bmassj |    pl_radj | discoverymethod   |   disc_year |
++=====+===========+============+=============+============+===================+=============+
+| 186 | AU Mic b  | AU Mic     |   0.0282857 |   0.427336 | Transit           |        2020 |
++-----+-----------+------------+-------------+------------+-------------------+-------------+
+| 187 | AU Mic b  | AU Mic     |   0.0320928 | nan        | Transit           |        2020 |
++-----+-----------+------------+-------------+------------+-------------------+-------------+
+| 188 | AU Mic b  | AU Mic     |   0.0368123 | nan        | Transit           |        2020 |
++-----+-----------+------------+-------------+------------+-------------------+-------------+
+| 189 | AU Mic b  | AU Mic     |   0.0538026 | nan        | Transit           |        2020 |
++-----+-----------+------------+-------------+------------+-------------------+-------------+
+| 190 | AU Mic b  | AU Mic     |   0.18      |   0.375    | Transit           |        2020 |
++-----+-----------+------------+-------------+------------+-------------------+-------------+
+| 191 | AU Mic b  | AU Mic     |   0.053488  |   0.363102 | Transit           |        2020 |
++-----+-----------+------------+-------------+------------+-------------------+-------------+
+| 192 | AU Mic b  | AU Mic     |   0.0633046 | nan        | Transit           |        2020 |
++-----+-----------+------------+-------------+------------+-------------------+-------------+
+| 196 | AU Mic b  | AU Mic     |   0.0191928 | nan        | Transit           |        2020 |
++-----+-----------+------------+-------------+------------+-------------------+-------------+
+| 201 | AU Mic c  | AU Mic     |   0.0364977 | nan        | Transit           |        2021 |
++-----+-----------+------------+-------------+------------+-------------------+-------------+
+| 203 | AU Mic c  | AU Mic     |   0.0454963 |   0.248908 | Transit           |        2021 |
++-----+-----------+------------+-------------+------------+-------------------+-------------+
+
+ Llama3:
+ These planets have an average mass of 0.05 Jupiter masses, with the largest reaching 0.18. Most were discovered using Transit.
+
+ DeepSeek:
+ The results show planets discovered mainly around 2021, with dominant methods like Transit and varying masses.   
+
+ Comparison
+Query diff detected
+Summary diff detected
+
+ Final:
+ Final Summary:
+These planets have an average mass of 0.05 Jupiter masses, with the largest reaching 0.18. Most were discovered using Transit.
+
+Additional Insight:
+The results show planets discovered mainly around 2021, with dominant methods like Transit and varying masses.    
+
+Question: planets after 3000
+
+ Llama3 Query:
+ Here is the one-line Pandas query:
+```
+df.query('disc_year > 3000')
+```
+
+ DeepSeek Query:
+
+
+ Selected Query:
+ df.query('disc_year > 3000')
+ No results found
+
+Question: planets with color red
+ 'color' is not a valid attribute in this dataset.
