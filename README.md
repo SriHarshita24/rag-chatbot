@@ -1,72 +1,67 @@
-# DocuMind — RAG Document Chatbot
+# RAG Chatbot — Exoplanet Data Analysis
 
-A Retrieval-Augmented Generation (RAG) chatbot that helps users ask questions about documents and receive context-aware answers using a locally running Large Language Model (LLM).
+A Python-based AI chatbot that answers natural-language questions about exoplanets using a structured dataset and locally running Large Language Models (LLMs).
 
-The project combines document processing, information retrieval, and generative AI to make document-based question answering easier and more efficient.
+The project combines Pandas-based data analysis with Ollama-powered LLMs, Llama 3 and DeepSeek-R1, to generate data queries, summarize results, compare model outputs, and produce a unified response.
 
 ## Overview
 
-DocuMind is designed to let users interact with their documents through natural-language questions. Instead of relying only on an LLM's pre-trained knowledge, a RAG system retrieves relevant information from the provided documents and uses that context to generate answers.
+This project allows users to explore an exoplanet dataset by asking questions in natural language. It processes the dataset using Pandas, applies filtering and sorting operations, and uses two LLMs to generate queries and analyze the resulting data.
 
-The project uses Python and Ollama to support local LLM inference, reducing the need to send document content to an external LLM API.
+The chatbot compares the responses from both models and attempts to resolve differences into a single summary.
 
 ## Features
 
-- Ask natural-language questions about documents
-- Extract and process document content
-- Split documents into smaller text chunks for retrieval
-- Retrieve relevant context for user queries
-- Generate context-aware responses using an LLM
-- Run a supported language model locally through Ollama
-- Build a foundation for private, document-based question answering
+- Natural-language queries for exoplanet data
+- Dataset overview, including planet count, discovery-year range, average mass, and common discovery methods
+- Data filtering and sorting using Pandas
+- LLM-generated Pandas queries using Llama 3 and DeepSeek-R1
+- Rule-based query handling for selected conditions
+- Tabular output using the Tabulate library
+- AI-generated summaries of query results
+- Comparison of outputs from two language models
+- Unified summaries when model responses differ
+- Local LLM inference through Ollama
 
 ## Tech Stack
 
-- **Python** — application logic and document processing
-- **Ollama** — running local language models
-- **Large Language Models (LLMs)** — generating answers from retrieved context
-- **Retrieval-Augmented Generation (RAG)** — connecting document retrieval with answer generation
-- **VS Code** — development environment
-
-*Add your exact embedding model, vector database, document formats, and UI framework here once confirmed from your implementation.*
+- **Python** — core application logic
+- **Pandas** — dataset processing, filtering, and sorting
+- **Ollama** — local LLM inference
+- **Llama 3** — query generation and result summarization
+- **DeepSeek-R1** — alternative query generation and summarization
+- **Requests** — communication with the Ollama API
+- **Tabulate** — formatted tabular output
+- **Regular Expressions** — query validation and response cleaning
+- **CSV** — structured exoplanet dataset
 
 ## How It Works
 
-1. **Document ingestion:** Load the documents that the user wants to query.
-2. **Text extraction:** Extract readable text from the documents.
-3. **Chunking:** Divide the text into smaller sections to improve retrieval.
-4. **Embedding and indexing:** Convert text chunks into vector representations and index them for similarity search.
-5. **Query processing:** Accept a question from the user.
-6. **Context retrieval:** Find document chunks relevant to the question.
-7. **Answer generation:** Provide the retrieved context and question to the LLM.
-8. **Response:** Return an answer grounded in the retrieved document content.
+1. **Load the dataset:** Read `cleaned_exoplanet_dataset.csv` using Pandas.
+2. **Prepare the data:** Select relevant columns and remove records missing planet mass or discovery year.
+3. **Introduce the dataset:** Display summary statistics, discovery-year range, and common discovery methods.
+4. **Validate user input:** Check whether query terms appear to reference valid dataset attributes.
+5. **Generate queries:** Ask Llama 3 and DeepSeek-R1 to convert the natural-language question into a Pandas query.
+6. **Retrieve results:** Apply supported rule-based filters or execute a selected generated query.
+7. **Display data:** Present the results in a formatted table.
+8. **Summarize results:** Ask both models to analyze the retrieved data.
+9. **Compare responses:** Identify differences between generated queries and summaries.
+10. **Resolve discrepancies:** Use Llama 3 to combine differing summaries into a unified response.
 
-## Architecture
+## Dataset
 
-```text
-User Documents
-      |
-      v
-Document Loading & Text Extraction
-      |
-      v
-Text Chunking
-      |
-      v
-Embeddings & Vector Index
-      |
-      v
-User Question
-      |
-      v
-Relevant Context Retrieval
-      |
-      v
-Local LLM via Ollama
-      |
-      v
-Context-Aware Answer
-```
+The project uses `cleaned_exoplanet_dataset.csv` and selects the following columns:
+
+| Column | Description |
+|---|---|
+| `pl_name` | Planet name |
+| `hostname` | Name of the host star |
+| `pl_bmassj` | Planet mass in Jupiter-mass units |
+| `pl_radj` | Planet radius in Jupiter-radius units |
+| `discoverymethod` | Method used to discover the planet |
+| `disc_year` | Year of discovery |
+
+Records without a planet mass or discovery year are excluded during preprocessing.
 
 ## Getting Started
 
@@ -74,20 +69,17 @@ Context-Aware Answer
 
 - Python 3.11 or a compatible Python version
 - Git
-- Visual Studio Code or another Python IDE
 - Ollama installed and running
-- A compatible local language model
+- The required Ollama models downloaded locally
 
-### Installation
-
-Clone the repository:
+### Clone the Repository
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
-cd documind_rag_chatbot
+git clone https://github.com/SriHarshita24/rag-chatbot.git
+cd rag-chatbot
 ```
 
-Create a virtual environment:
+### Create a Virtual Environment
 
 ```bash
 python -m venv .venv
@@ -99,13 +91,11 @@ Activate it on Windows:
 .venv\Scripts\activate
 ```
 
-Install the project dependencies:
+### Install Dependencies
 
 ```bash
-python -m pip install -r requirements.txt
+python -m pip install pandas requests tabulate
 ```
-
-If your repository does not yet contain a `requirements.txt`, create one based on the packages actually imported by your project.
 
 ### Set Up Ollama
 
@@ -113,71 +103,82 @@ Install Ollama from the official website:
 
 https://ollama.com/
 
-Download a supported model. For example, if you choose Llama 3.2:
+Download the models used by the project:
 
 ```bash
-ollama pull llama3.2
+ollama pull llama3
+ollama pull deepseek-r1
 ```
 
-Confirm that the model is available:
+Ensure Ollama is running and the local API at `http://localhost:11434` is accessible.
+
+### Run the Chatbot
 
 ```bash
-ollama list
+python project.py
 ```
 
-Make sure Ollama is running before starting the chatbot. The model name in your application configuration must match the model you downloaded.
+Keep the dataset CSV file in the project directory so the script can load it.
 
-### Run the Application
+## Example Questions
 
-Use the command corresponding to your project's entry-point file. For example, if your application uses Streamlit:
+Try asking:
 
-```bash
-streamlit run app.py
+- `largest planets`
+- `planets after 2015`
+- `largest planets after 2015 using transit`
+
+Type `exit` to stop the chatbot.
+
+## Example Workflow
+
+```text
+User Question
+      |
+      v
+Input Validation
+      |
+      v
+Llama 3 + DeepSeek-R1
+      |
+      v
+Query Generation / Rule-Based Filtering
+      |
+      v
+Pandas Data Processing
+      |
+      v
+Formatted Results Table
+      |
+      v
+Two LLM-Generated Summaries
+      |
+      v
+Response Comparison
+      |
+      v
+Unified Final Summary
 ```
-
-Replace `app.py` with your actual entry-point filename if it differs.
-
-## Example Use Case
-
-A user uploads a document containing technical information and asks:
-
-**Question:** What are the main objectives described in this document?
-
-The RAG pipeline retrieves relevant passages from the document and supplies them to the LLM to generate a context-aware response.
-
-## Why RAG?
-
-A standard LLM may answer from its general training knowledge, which may not include the contents of a user's private or newly supplied documents.
-
-RAG helps by retrieving relevant source material at query time and using it to ground the generated answer. The quality of the response still depends on document extraction, retrieval quality, model behaviour, and the context provided.
-
-## Potential Applications
-
-- Document question answering
-- Research paper analysis
-- Technical documentation assistance
-- Study material summarization
-- Internal knowledge-base search
-- Policy and report exploration
-
-## Future Improvements
-
-- Support additional document formats
-- Display source passages alongside answers
-- Improve retrieval quality through embedding and chunking experiments
-- Add conversation history for follow-up questions
-- Evaluate retrieval accuracy and answer quality
-- Improve error handling and document validation
-- Add automated tests and setup documentation
 
 ## Limitations
 
-- Answer quality depends on the relevance and completeness of retrieved context.
-- Local model performance depends on available hardware and the selected model.
-- Poorly extracted or scanned documents may require additional processing.
-- The chatbot may still produce incorrect or unsupported answers.
-- Running locally does not automatically guarantee complete privacy; application logs, storage, and external integrations also matter.
+- Query generation and interpretation may fail for unsupported or ambiguous questions.
+- Rule-based filtering handles only selected query patterns.
+- The generated Pandas query may not correctly represent every natural-language request.
+- Results depend on the completeness and quality of the dataset.
+- Differences between model responses do not necessarily mean either model is correct.
+- The application requires the Ollama service and both configured models to be available.
+
+## Future Improvements
+
+- Replace `eval()`-based query execution with a safer query-generation approach.
+- Improve natural-language query parsing and filtering.
+- Add automated tests for query generation and result accuracy.
+- Add a graphical interface for easier interaction.
+- Include dataset citations and clearer explanations of the results.
+- Evaluate model responses against expected results.
+- Add configuration options for model selection and generation parameters.
 
 ## Disclaimer
 
-DocuMind is an educational project exploring Retrieval-Augmented Generation and local LLMs. Its responses should be checked against the original documents when accuracy is important.
+This project is intended for educational and experimental purposes. AI-generated summaries should be checked against the underlying dataset before being used for research or other decisions.
